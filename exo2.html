@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="style.css">
+  <title>Sentence Searcher</title>
+</head>
+<body>
+
+<h1>Sentence Searcher</h1>
+
+<!-- Un formulaire pour entrer une phrase et un mot à rechercher -->
+<form>
+  <label for="sentence">Entrez une phrase :</label>
+  <input type="text" id="sentence" placeholder="Ex. I have a cat.">
+  <br>
+  <label for="word">Mot à rechercher :</label>
+  <input type="text" id="word" placeholder="Ex. cat">
+  <br>
+  <button onclick="searchSentence()">Rechercher</button>
+</form>
+
+<!-- Un élément pour afficher le résultat -->
+<div id="result"></div>
+
+<script>
+  function sentenceSearcher(str, word) {
+  // Utilise une expression régulière pour diviser les phrases
+  const sentences = str.split(/[.!?]/);
+
+  for (const sentence of sentences) {
+    if (sentence.toLowerCase().includes(word.toLowerCase())) {
+      // Ajoute le délimiteur approprié à la fin de la phrase
+      return sentence.trim() + (sentence.endsWith('.') ? '.' : '') + ' ';
+    }
+  }
+  return '';
+}
+
+  function searchSentence() {
+  const sentenceInput = document.getElementById('sentence').value;
+  const wordInput = document.getElementById('word').value;
+
+  const result = sentenceSearcher(sentenceInput, wordInput);
+  if (result === '') {
+    alert("Aucune phrase trouvée.");
+  } else {
+    alert("Résultat : " + result);
+  }
+}
+
+</script>
+
+</body>
+</html>
